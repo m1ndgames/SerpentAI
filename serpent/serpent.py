@@ -423,7 +423,7 @@ def window_name():
 
     window_controller = WindowController()
 
-    time.sleep(5)
+    time.sleep(15)
 
     focused_window_name = window_controller.get_focused_window_name()
 
