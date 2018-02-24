@@ -21,8 +21,13 @@ class SteamGameLauncher(GameLauncher):
         protocol_string = f"steam://run/{app_id}"
 
         if app_args is not None:
-            args_list = [f"--{k}={v}" for k, v in app_args.items()]
-            protocol_string += "/en/" + " ".join(args_list)
+            args_list = list()
+            for k, v in app_args.items():
+                if v:
+                    args_list.append("--{}={}".format(k, v))
+                else:
+                    args_list.append("-{}".format(k))
+        protocol_string += "/en/" + " ".join(args_list)
 
         if is_linux():
             subprocess.call(shlex.split(f"xdg-open '{protocol_string}'"))
